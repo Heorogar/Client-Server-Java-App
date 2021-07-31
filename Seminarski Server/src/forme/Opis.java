@@ -28,6 +28,7 @@ public class Opis extends javax.swing.JDialog {
         btnSave = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setLocation(new java.awt.Point(700, 200));
 
         txtOpis.setColumns(20);
         txtOpis.setRows(5);

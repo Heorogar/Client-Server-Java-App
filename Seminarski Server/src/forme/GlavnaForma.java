@@ -41,6 +41,7 @@ public class GlavnaForma extends javax.swing.JFrame {
         btnDodajOglas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(700, 200));
 
         tabelaOglasi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
