@@ -5,9 +5,11 @@
  */
 package forme;
 
+import domen.Firma;
 import domen.Oglas.Senioritet;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
 import javax.swing.JOptionPane;
 import logika.Kontroler;
 import modeli.ModelGlavneForme;
@@ -19,6 +21,7 @@ public class GlavnaForma extends javax.swing.JFrame {
         this.model=model;
         tabelaOglasi.setModel(model);
         setujComboSenioritet();
+        setujComboFirme();
     }
     
     @SuppressWarnings("unchecked")
@@ -37,6 +40,8 @@ public class GlavnaForma extends javax.swing.JFrame {
         txtPretragaPozicije = new javax.swing.JTextField();
         btnPretragaPozicije = new javax.swing.JButton();
         btnOpis = new javax.swing.JButton();
+        comboFirme = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(700, 200));
@@ -98,6 +103,10 @@ public class GlavnaForma extends javax.swing.JFrame {
             }
         });
 
+        comboFirme.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel1.setText("Firma:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -108,18 +117,20 @@ public class GlavnaForma extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnOpis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(comboSenioritet, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(txtPretragaPozicije, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnPrijava, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnPrethodnePrijave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnPretragaPozicije, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPretragaPozicije)
                             .addComponent(labelaSenioritet)
-                            .addComponent(labelaPozicija))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(labelaPozicija)
+                            .addComponent(jLabel1))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(txtPretragaPozicije, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboFirme, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(248, 248, 248)
@@ -144,11 +155,15 @@ public class GlavnaForma extends javax.swing.JFrame {
                         .addComponent(txtPretragaPozicije, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnPretragaPozicije)
-                        .addGap(66, 66, 66)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(comboFirme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
                         .addComponent(btnOpis)
-                        .addGap(48, 48, 48)
-                        .addComponent(btnPrijava)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnPrijava)
+                        .addGap(27, 27, 27)
                         .addComponent(btnPrethodnePrijave)
                         .addGap(46, 46, 46)
                         .addComponent(btnRefresh)
@@ -201,7 +216,9 @@ public class GlavnaForma extends javax.swing.JFrame {
     private javax.swing.JButton btnPretragaPozicije;
     private javax.swing.JButton btnPrijava;
     private javax.swing.JButton btnRefresh;
+    private javax.swing.JComboBox comboFirme;
     private javax.swing.JComboBox comboSenioritet;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelaPozicija;
     private javax.swing.JLabel labelaSenioritet;
@@ -225,5 +242,20 @@ public class GlavnaForma extends javax.swing.JFrame {
     private void printError(String error){
         if(!error.equals(""))
             JOptionPane.showMessageDialog(this, error);
+    }
+
+    private void setujComboFirme() {
+        comboFirme.removeAllItems();
+        HashSet<Firma> firme=model.vratiFirme();
+        comboFirme.addItem(new Firma(-1,"Sve"));
+        for(Firma f: firme)
+            comboFirme.addItem(f);
+        comboFirme.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                model.update((Firma) comboFirme.getSelectedItem());
+                model.fireTableDataChanged();
+            }
+        });
     }
 }

@@ -5,6 +5,7 @@
  */
 package persistance;
 
+import domen.Firma;
 import domen.Korisnik;
 import domen.Oglas;
 import domen.Oglas.Senioritet;
@@ -100,7 +101,7 @@ public class DbBroker {
                         case "Senior": senioritet=Senioritet.Senior;
                             break;
                     }
-                    oglasi.add(new Oglas(rs.getString("Pozicija"), rs.getString("Firma"),senioritet,rs.getDate("Datum_isteka"),rs.getInt("PK")));
+                    oglasi.add(new Oglas(rs.getString("Pozicija"), vratiFirmu(rs.getInt("Firma")),senioritet,rs.getDate("Datum_isteka"),rs.getInt("PK")));
                 }
             }
         }
@@ -162,7 +163,7 @@ public class DbBroker {
             ps.setString(2, s);
             ps.setDate(3, new Date(oglas.getDatumIsteka().getTime()));
             ps.setString(4, oglas.getOpis());
-            ps.setString(5, oglas.getFirma());
+            ps.setInt(5, oglas.getFirma().getId());
             ps.executeUpdate();
             try(ResultSet rs=ps.getGeneratedKeys()){
                 rs.next();
@@ -215,7 +216,7 @@ public class DbBroker {
             }
             ps.setString(2, s);
             ps.setDate(3, new Date(oglas.getDatumIsteka().getTime()));
-            ps.setString(4, oglas.getFirma());
+            ps.setInt(4, oglas.getFirma().getId());
             ps.setInt(5, oglas.getId());
             ps.executeUpdate();
         }
@@ -257,9 +258,20 @@ public class DbBroker {
                     case "Junior": s=Senioritet.Junior;
                         break;
             }
-                o=new Oglas(rs.getString("Pozicija"), rs.getString("Firma"), s, rs.getDate("Datum_isteka"), id);
+                o=new Oglas(rs.getString("Pozicija"), vratiFirmu(rs.getInt("Firma")), s, rs.getDate("Datum_isteka"), id);
             }
         } 
         return o;
+    }
+    
+    private Firma vratiFirmu(int id) throws SQLException{
+        String upit="SELECT * FROM firme WHERE PK=?";
+        try(PreparedStatement ps=conn.prepareStatement(upit)){
+            ps.setInt(1, id);
+            try(ResultSet rs=ps.executeQuery()){
+                rs.next();
+                return new Firma(id, rs.getString("Ime"));
+            }
+        }
     }
 }

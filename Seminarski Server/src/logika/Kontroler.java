@@ -5,6 +5,7 @@
  */
 package logika;
 
+import domen.Firma;
 import domen.Oglas;
 import forme.GlavnaForma;
 import forme.PokretanjeServera;
@@ -75,7 +76,9 @@ public class Kontroler {
         return (String) new removeOglasTransaction(db).transaction(o);
     }
 
-    public String dodajOglas(String polozaj, Oglas.Senioritet senioritet, String datumIsteka, String firma, String opis) {
+    public String dodajOglas(String polozaj, Oglas.Senioritet senioritet, String datumIsteka, Firma firma, String opis) {
+        if(polozaj.isEmpty() || opis.isEmpty())
+            return "Molimo Vas popunite sva polja";
         SimpleDateFormat sdf=new SimpleDateFormat("dd.MM.yyyy");
         Oglas o;
         try {

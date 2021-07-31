@@ -17,13 +17,13 @@ public class Oglas implements Serializable{
         Senior
     };
     private String pozicija;
-    private String firma;
+    private Firma firma;
     private Senioritet senioritet;
     private Date datumIsteka;
     private String opis;
     private int id;
     
-    public Oglas(String pozicija, String firma, Senioritet senioritet, Date datumIsteka, String opis) {
+    public Oglas(String pozicija, Firma firma, Senioritet senioritet, Date datumIsteka, String opis) {
         this.pozicija = pozicija;
         this.firma=firma;
         this.senioritet = senioritet;
@@ -31,16 +31,16 @@ public class Oglas implements Serializable{
         this.opis = opis;
     }
 
-    public Oglas(String pozicija, String firma, Senioritet senioritet, Date datumIsteka, int id) {
+    public Oglas(String pozicija, Firma firma, Senioritet senioritet, Date datumIsteka, int id) {
         this.pozicija = pozicija;
         this.firma = firma;
         this.senioritet = senioritet;
         this.datumIsteka = datumIsteka;
-        this.opis = opis;
+        this.opis = "";
         this.id = id;
     }
     
-    public Oglas(String pozicija, String firma, Senioritet senioritet, Date datumIsteka) {
+    public Oglas(String pozicija, Firma firma, Senioritet senioritet, Date datumIsteka) {
         this.pozicija = pozicija;
         this.firma=firma;
         this.senioritet = senioritet;
@@ -56,11 +56,11 @@ public class Oglas implements Serializable{
         this.id = id;
     }
 
-    public String getFirma() {
+    public Firma getFirma() {
         return firma;
     }
 
-    public void setFirma(String firma) {
+    public void setFirma(Firma firma) {
         this.firma = firma;
     }
     

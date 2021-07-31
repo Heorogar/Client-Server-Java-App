@@ -5,6 +5,7 @@
  */
 package modeli;
 
+import domen.Firma;
 import domen.Oglas;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,7 +41,7 @@ public class ModelGlavneForme extends AbstractTableModel{
     }
     @Override
     public int getColumnCount() {
-        return 3;
+        return 4;
     }
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
@@ -54,6 +55,8 @@ public class ModelGlavneForme extends AbstractTableModel{
                 break;
             case 2: res=sdf.format(oglas.getDatumIsteka()); 
                 break;
+            case 3: res=oglas.getFirma().getIme(); 
+                break;
         }
         return res;
     }
@@ -66,6 +69,8 @@ public class ModelGlavneForme extends AbstractTableModel{
             case 1: res="Senioritet";
                 break;
             case 2: res="Datum isteka";
+                break;
+            case 3: res="Firma";
                 break;
         }
         return res;
@@ -107,6 +112,8 @@ public class ModelGlavneForme extends AbstractTableModel{
                 JOptionPane.showMessageDialog(null, "Datum mora biti u formatu dd.mm.yyyy");
             }
                 break;
+            case 3: oglas.setFirma((Firma) o);
+                break;
         }
         fireTableCellUpdated(rowIndex, columnIndex);
         promenjeniOglasi.add(oglas);
@@ -128,6 +135,27 @@ public class ModelGlavneForme extends AbstractTableModel{
                     return;
                 }
         oglasi.remove(red);
+    }
+
+    public HashSet<Firma> vratiFirme() {
+        HashSet<Firma> firme=new HashSet<>();
+        for(int i=0;i<sviOglasi.size();i++)
+            if(!firme.contains(sviOglasi.get(i).getFirma()))
+                firme.add(sviOglasi.get(i).getFirma());
+        return firme;    
+    }
+
+    public void update(Firma firma) {
+        if(firma.getId()==-1){
+            if(sviOglasi.size()!=oglasi.size())
+                oglasi=(ArrayList<Oglas>) sviOglasi.clone();
+            return;
+        }
+        ArrayList<Oglas> temp=new ArrayList<>();
+        for(int i=0;i<sviOglasi.size();i++)
+            if(sviOglasi.get(i).getFirma().equals(firma))
+                temp.add(sviOglasi.get(i));
+        oglasi=temp;
     }
     
     

@@ -5,10 +5,12 @@
  */
 package modeli;
 
+import domen.Firma;
 import domen.Oglas;
 import domen.Oglas.Senioritet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import javax.swing.table.AbstractTableModel;
 
 public class ModelGlavneForme extends AbstractTableModel{
@@ -32,7 +34,7 @@ public class ModelGlavneForme extends AbstractTableModel{
     }
     @Override
     public int getColumnCount() {
-        return 3;
+        return 4;
     }
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
@@ -46,6 +48,8 @@ public class ModelGlavneForme extends AbstractTableModel{
                 break;
             case 2: res=sdf.format(oglas.getDatumIsteka()); 
                 break;
+            case 3: res=oglas.getFirma().getIme(); 
+                break;
         }
         return res;
     }
@@ -58,6 +62,8 @@ public class ModelGlavneForme extends AbstractTableModel{
             case 1: res="Senioritet";
                 break;
             case 2: res="Datum isteka";
+                break;
+            case 3: res="Firma";
                 break;
         }
         return res;
@@ -83,5 +89,26 @@ public class ModelGlavneForme extends AbstractTableModel{
             if(oglasi.get(i).getPozicija().matches(pattern))
                 temp.add(oglasi.get(i));
         oglasi=temp;
+    }
+
+    public void update(Firma firma) {
+        if(firma.getId()==-1){
+            if(sviOglasi.size()!=oglasi.size())
+                oglasi=(ArrayList<Oglas>) sviOglasi.clone();
+            return;
+        }
+        ArrayList<Oglas> temp=new ArrayList<>();
+        for(int i=0;i<sviOglasi.size();i++)
+            if(sviOglasi.get(i).getFirma().equals(firma))
+                temp.add(sviOglasi.get(i));
+        oglasi=temp;
+    }
+
+    public HashSet<Firma> vratiFirme() {
+        HashSet<Firma> firme=new HashSet<>();
+        for(int i=0;i<sviOglasi.size();i++)
+            if(!firme.contains(sviOglasi.get(i).getFirma()))
+                firme.add(sviOglasi.get(i).getFirma());
+        return firme;
     }
 }

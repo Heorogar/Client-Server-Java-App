@@ -5,7 +5,9 @@
  */
 package forme;
 
+import domen.Firma;
 import domen.Oglas;
+import java.util.HashSet;
 import javax.swing.JOptionPane;
 import logika.Kontroler;
 
@@ -15,6 +17,7 @@ public class DodajOglas extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setujComboSenioritet();
+        setujComboFirme();
     }
 
     @SuppressWarnings("unchecked")
@@ -31,9 +34,9 @@ public class DodajOglas extends javax.swing.JDialog {
         txtPolozaj = new javax.swing.JTextField();
         comboSenioritet = new javax.swing.JComboBox();
         txtDatum = new javax.swing.JTextField();
-        txtFirma = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtOpis = new javax.swing.JTextArea();
+        comboFirme = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocation(new java.awt.Point(700, 200));
@@ -64,6 +67,8 @@ public class DodajOglas extends javax.swing.JDialog {
         txtOpis.setRows(5);
         jScrollPane1.setViewportView(txtOpis);
 
+        comboFirme.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,21 +81,24 @@ public class DodajOglas extends javax.swing.JDialog {
                         .addGap(38, 38, 38)
                         .addComponent(txtDatum, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel6))
-                        .addGap(57, 57, 57)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPolozaj)
-                            .addComponent(comboSenioritet, 0, 129, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(79, 79, 79)
-                        .addComponent(txtFirma, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel6))
+                                .addGap(57, 57, 57)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtPolozaj)
+                                    .addComponent(comboSenioritet, 0, 129, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(79, 79, 79)
+                                .addComponent(comboFirme, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(21, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(88, 88, 88)
@@ -120,8 +128,8 @@ public class DodajOglas extends javax.swing.JDialog {
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFirma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(comboFirme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -137,15 +145,18 @@ public class DodajOglas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        String error=Kontroler.getInstance().dodajOglas(txtPolozaj.getText(), (Oglas.Senioritet) comboSenioritet.getSelectedItem(),txtDatum.getText(),txtFirma.getText(),txtOpis.getText());
+        String error=Kontroler.getInstance().dodajOglas(txtPolozaj.getText(), (Oglas.Senioritet) comboSenioritet.getSelectedItem(),txtDatum.getText(), (Firma) comboFirme.getSelectedItem(),txtOpis.getText());
         if(!error.equals(""))
             JOptionPane.showMessageDialog(this, error);
-        else
+        else{
+            JOptionPane.showMessageDialog(this, "Uspesno ste dodali oglas");
             dispose();
+        }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JComboBox comboFirme;
     private javax.swing.JComboBox comboSenioritet;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -155,7 +166,6 @@ public class DodajOglas extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtDatum;
-    private javax.swing.JTextField txtFirma;
     private javax.swing.JTextArea txtOpis;
     private javax.swing.JTextField txtPolozaj;
     // End of variables declaration//GEN-END:variables
@@ -164,5 +174,12 @@ public class DodajOglas extends javax.swing.JDialog {
         comboSenioritet.removeAllItems();
         for(Oglas.Senioritet s:Oglas.Senioritet.values())
             comboSenioritet.addItem(s);
+    }
+
+    private void setujComboFirme() {
+        comboFirme.removeAllItems();
+        HashSet<Firma> firme=((GlavnaForma)getParent()).getModel().vratiFirme();
+        for(Firma f: firme)
+            comboFirme.addItem(f);
     }
 }

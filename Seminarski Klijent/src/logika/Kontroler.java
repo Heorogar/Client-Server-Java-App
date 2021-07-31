@@ -5,6 +5,7 @@
  */
 package logika;
 
+import domen.Firma;
 import domen.Korisnik;
 import domen.Oglas;
 import domen.Opcode.Operacija;
@@ -24,6 +25,7 @@ import transfer.ServerTransfer;
 
 public class Kontroler {
     private static Kontroler instanca;
+
     private GlavnaForma gf;
     private ServerTransfer komunikacija;
     private ModelGlavneForme modelGF;

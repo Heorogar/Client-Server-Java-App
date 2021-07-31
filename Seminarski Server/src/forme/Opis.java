@@ -75,8 +75,10 @@ public class Opis extends javax.swing.JDialog {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         String error=Kontroler.getInstance().setOpis(oglas, txtOpis.getText());
-        if(error.equals(""))
+        if(error.equals("")){
+            JOptionPane.showMessageDialog(this, "Uspesno ste izmenili opis");
             dispose();
+        }
         else
             JOptionPane.showMessageDialog(this, error);
     }//GEN-LAST:event_btnSaveActionPerformed

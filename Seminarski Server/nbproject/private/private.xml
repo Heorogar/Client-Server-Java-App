@@ -6,6 +6,12 @@
             <file>file:/C:/Users/Kagrenac/Documents/NetBeansProjects/Seminarski%20Server/src/persistance/DbBroker.java</file>
             <file>file:/C:/Users/Kagrenac/Documents/NetBeansProjects/Seminarski%20Server/src/niti/PrihvatiKonekcije.java</file>
             <file>file:/C:/Users/Kagrenac/Documents/NetBeansProjects/Seminarski%20Server/src/niti/UsluziKlijenta.java</file>
+            <file>file:/C:/Users/Kagrenac/Documents/NetBeansProjects/Seminarski%20Server/src/forme/GlavnaForma.java</file>
+            <file>file:/C:/Users/Kagrenac/Documents/NetBeansProjects/Seminarski%20Server/src/forme/Opis.java</file>
+            <file>file:/C:/Users/Kagrenac/Documents/NetBeansProjects/Seminarski%20Server/src/forme/DodajOglas.java</file>
+            <file>file:/C:/Users/Kagrenac/Documents/NetBeansProjects/Seminarski%20Server/src/forme/PokretanjeServera.java</file>
+            <file>file:/C:/Users/Kagrenac/Documents/NetBeansProjects/Seminarski%20Server/src/logika/Kontroler.java</file>
+            <file>file:/C:/Users/Kagrenac/Documents/NetBeansProjects/Seminarski%20Server/src/modeli/ModelGlavneForme.java</file>
         </group>
     </open-files>
 </project-private>

@@ -33,7 +33,7 @@ public class ModelPrethodnePrijave extends AbstractTableModel{
     }
     @Override
     public int getColumnCount() {
-        return 5;
+        return 6;
     }
     @Override
     public String getColumnName(int columnIndex) {
@@ -41,13 +41,15 @@ public class ModelPrethodnePrijave extends AbstractTableModel{
         switch(columnIndex){
             case 0: res="Pozicija";
                 break;
-            case 1: res="Senioritet";
+            case 1: res="Firma";
                 break;
-            case 2: res="Datum isteka";
+            case 2: res="Senioritet";
                 break;
-            case 3: res="CV link";
+            case 3: res="Datum isteka";
                 break;
-            case 4: res="Mail";
+            case 4: res="CV link";
+                break;
+            case 5: res="Mail";
                 break;
         }
         return res;
@@ -60,13 +62,15 @@ public class ModelPrethodnePrijave extends AbstractTableModel{
         switch(columnIndex){
             case 0: res=p.getOglas().getPozicija(); 
                 break;
-            case 1: res=p.getOglas().getSenioritet(); 
+            case 1: res=p.getOglas().getFirma().getIme(); 
                 break;
-            case 2: res=sdf.format(p.getOglas().getDatumIsteka()); 
+            case 2: res=p.getOglas().getSenioritet(); 
                 break;
-            case 3: res=p.getCvLink(); 
+            case 3: res=sdf.format(p.getOglas().getDatumIsteka()); 
+                break;
+            case 4: res=p.getCvLink(); 
                 break; 
-            case 4: res=p.getMail();
+            case 5: res=p.getMail();
                 break;
         }
         return res;
