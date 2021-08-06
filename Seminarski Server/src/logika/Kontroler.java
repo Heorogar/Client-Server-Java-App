@@ -18,7 +18,7 @@ import niti.PrihvatiKonekcije;
 import operacije.dodajOglasTransaction;
 import operacije.removeOglasTransaction;
 import operacije.setujOpisTransaction;
-import operacije.updateOglasTrasnsaction;
+import operacije.updateOglasTransaction;
 import operacije.vratiOglaseServerTransaction;
 import operacije.vratiOpisServerTransaction;
 import persistance.DbBroker;
@@ -95,10 +95,13 @@ public class Kontroler {
 
     public String sacuvajOglase(HashSet<Oglas> promenjeniOglasi) {
         for(Oglas o:promenjeniOglasi){
-            String error=(String) new updateOglasTrasnsaction(db).transaction(o);
+            if(o.getPozicija().equals("") || o.getOpis().equals(""))
+                return "Molimo Vas popunite sva prazna polja";
+            String error=(String) new updateOglasTransaction(db).transaction(o);
             if (!error.equals(""))
                 return error;
         }
+        modelGF.getPromenjeniOglasi().clear();
         return "";
     }
 }

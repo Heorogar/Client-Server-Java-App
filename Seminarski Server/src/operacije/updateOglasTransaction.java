@@ -9,9 +9,9 @@ import domen.Oglas;
 import java.sql.SQLException;
 import persistance.DbBroker;
 
-public class updateOglasTrasnsaction extends SistemskeOperacije{
+public class updateOglasTransaction extends SistemskeOperacije{
 
-    public updateOglasTrasnsaction(DbBroker db) {
+    public updateOglasTransaction(DbBroker db) {
         super(db);
     }
 

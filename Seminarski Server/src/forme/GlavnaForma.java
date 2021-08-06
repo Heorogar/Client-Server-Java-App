@@ -87,6 +87,11 @@ public class GlavnaForma extends javax.swing.JFrame {
         labelaSenioritet.setText("Senioritet:");
 
         comboSenioritet.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboSenioritet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboSenioritetActionPerformed(evt);
+            }
+        });
 
         labelaPozicija.setText("Pozicija:");
 
@@ -218,6 +223,10 @@ public class GlavnaForma extends javax.swing.JFrame {
         DodajOglas dodajf=new DodajOglas(this, true);
         dodajf.setVisible(true);
     }//GEN-LAST:event_btnDodajOglasActionPerformed
+
+    private void comboSenioritetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboSenioritetActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboSenioritetActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;

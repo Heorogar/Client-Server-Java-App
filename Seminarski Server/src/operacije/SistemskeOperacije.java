@@ -10,17 +10,6 @@ import persistance.DbBroker;
 
 public abstract class SistemskeOperacije {
     protected DbBroker db;
-    public static enum Operacija{
-        LOGIN,
-        VRATI_OPIS,
-        PRIJAVI,
-        VRATI_OGLASE,
-        VRATI_PRIJAVE,
-        SET_OPIS,
-        UKLONI_OGLAS,
-        DODAJ_OGLAS,
-        UPDATE_OGLAS
-    }
     public SistemskeOperacije(DbBroker db) {
         this.db = db;
     }

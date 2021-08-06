@@ -9,8 +9,14 @@ import domen.Opcode.ErrorCodes;
 import static domen.Opcode.errors;
 
 public class TransferServerResponseException extends Exception{
+    private ErrorCodes error;
     public TransferServerResponseException(ErrorCodes error) {
         super(errors.get(error));
+        this.error=error;
+    }
+
+    public ErrorCodes getError() {
+        return error;
     }
     
 }

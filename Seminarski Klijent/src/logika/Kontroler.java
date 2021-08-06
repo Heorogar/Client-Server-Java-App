@@ -5,9 +5,9 @@
  */
 package logika;
 
-import domen.Firma;
 import domen.Korisnik;
 import domen.Oglas;
+import domen.Opcode;
 import domen.Opcode.Operacija;
 import domen.Prijava;
 import transfer.TransferServerResponseException;
@@ -15,6 +15,8 @@ import forme.GlavnaForma;
 import forme.Login;
 import forme.PrethodnePrijave;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modeli.ModelGlavneForme;
 import modeli.ModelPrethodnePrijave;
@@ -57,6 +59,7 @@ public class Kontroler {
             komunikacija.transfer(new KlijentRequest(Operacija.LOGIN, korisnik));
             this.korisnik=korisnik;
         } catch (TransferServerResponseException ex) {
+            tryAgain(ex);
             return ex.getMessage();
         }
         return "";
@@ -80,6 +83,7 @@ public class Kontroler {
 //            oglas.setOpis(opis);
             return opis;
         } catch (TransferServerResponseException ex) {
+            tryAgain(ex);
             return ex.getMessage();
         }
     }
@@ -90,6 +94,7 @@ public class Kontroler {
 //            prijava.getOglas().setOpis(opis);
             return opis;
         } catch (TransferServerResponseException ex) {
+            tryAgain(ex);
             return ex.getMessage();
         }
     }
@@ -99,6 +104,7 @@ public class Kontroler {
         try {
             response = komunikacija.transfer(new KlijentRequest(Operacija.VRATI_OGLASE, 0));
         } catch (TransferServerResponseException ex) {
+            tryAgain(ex);
             return ex.getMessage();
         }
         modelGF.setOglasi((ArrayList<Oglas>) response.getData());
@@ -109,6 +115,7 @@ public class Kontroler {
         try {
             response = komunikacija.transfer(new KlijentRequest(Operacija.VRATI_PRIJAVE, korisnik));
         } catch (TransferServerResponseException ex) {
+            tryAgain(ex);
             return ex.getMessage();
         }
         ModelPrethodnePrijave modelPP=new ModelPrethodnePrijave((ArrayList<Prijava>) response.getData());
@@ -124,8 +131,17 @@ public class Kontroler {
         try {
             komunikacija.transfer(request);
         } catch (TransferServerResponseException ex) {
+            tryAgain(ex);
             return ex.getMessage();
         }
         return "";
+    }
+    private void tryAgain(TransferServerResponseException ex){
+        if(ex.getError().equals(Opcode.ErrorCodes.SERVER_ERROR))
+            try {
+                komunikacija=new ServerTransfer("localhost", Port.PORT);
+        } catch (TransferServerResponseException ex1) {
+            
+        }
     }
 }

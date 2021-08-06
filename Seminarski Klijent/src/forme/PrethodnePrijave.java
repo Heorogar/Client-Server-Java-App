@@ -58,6 +58,11 @@ public class PrethodnePrijave extends javax.swing.JFrame {
         });
 
         comboAktuelnost.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboAktuelnost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboAktuelnostActionPerformed(evt);
+            }
+        });
 
         labelaAktuelnost.setText("Aktuelnost");
 
@@ -108,6 +113,10 @@ public class PrethodnePrijave extends javax.swing.JFrame {
             o.setVisible(true);
         }
     }//GEN-LAST:event_btnOpisActionPerformed
+
+    private void comboAktuelnostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAktuelnostActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboAktuelnostActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOpis;
