@@ -7,7 +7,6 @@ package domen;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Objects;
 
 public class Oglas implements Serializable{
     public static enum Senioritet{
@@ -104,6 +103,13 @@ public class Oglas implements Serializable{
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 71 * hash + this.id;
+        return hash;
     }
     
 }

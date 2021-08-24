@@ -222,7 +222,7 @@ public class DbBroker {
         }
     }
 
-    public Object vratiPrijave(Korisnik korisnik) throws SQLException {
+    public ArrayList<Prijava> vratiPrijave(Korisnik korisnik) throws SQLException {
         String upit="SELECT * FROM prijave WHERE Korisnik=?";
         ArrayList<Prijava> prijave=new ArrayList<>();
         try(PreparedStatement ps=conn.prepareStatement(upit)){

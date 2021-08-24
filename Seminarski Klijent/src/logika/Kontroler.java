@@ -15,8 +15,6 @@ import forme.GlavnaForma;
 import forme.Login;
 import forme.PrethodnePrijave;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modeli.ModelGlavneForme;
 import modeli.ModelPrethodnePrijave;

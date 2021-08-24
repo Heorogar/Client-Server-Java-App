@@ -135,7 +135,7 @@ public class PrethodnePrijave extends javax.swing.JFrame {
         comboAktuelnost.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                model.update(comboAktuelnost.getSelectedItem());
+                model.update((String) comboAktuelnost.getSelectedItem());
                 model.fireTableDataChanged();
             }
         });

@@ -75,7 +75,7 @@ public class ModelPrethodnePrijave extends AbstractTableModel{
         }
         return res;
     }
-    public void update(Object selectedItem) {
+    public void update(String selectedItem) {
         if(selectedItem.equals("Svi oglasi")){
             if(svePrijave.size()!=prijave.size())
                 prijave=(ArrayList<Prijava>) svePrijave.clone();

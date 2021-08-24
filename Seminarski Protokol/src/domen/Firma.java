@@ -55,6 +55,13 @@ public class Firma implements Serializable{
     }
 
     @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 47 * hash + this.id;
+        return hash;
+    }
+
+    @Override
     public String toString() {
         return ime;
     }
